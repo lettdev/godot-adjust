@@ -5,11 +5,9 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-// TODO: Update value to your plugin's name.
-val pluginName = "GodotAndroidPluginTemplate"
+val pluginName = "GodotAdjust"
 
-// TODO: Update value to match your plugin's package name.
-val pluginPackageName = "org.godotengine.plugin.android.template"
+val pluginPackageName = "com.krad.godot.adjust"
 
 android {
     namespace = pluginPackageName
@@ -39,6 +37,14 @@ android {
 
 dependencies {
     implementation("org.godotengine:godot:4.2.0.stable")
+    api ("com.adjust.sdk:adjust-android:4.33.5")
+    api ("com.android.installreferrer:installreferrer:2.2")
+    api ("com.google.android.gms:play-services-ads-identifier:18.0.1")
+
+    implementation ("androidx.appcompat:appcompat:1.1.0")
+    testImplementation ("junit:junit:4.12")
+    androidTestImplementation ("androidx.test.ext:junit:1.1.1")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.2.0")
 }
 
 // BUILD TASKS DEFINITION
