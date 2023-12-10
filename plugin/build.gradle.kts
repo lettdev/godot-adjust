@@ -7,7 +7,7 @@ plugins {
 
 val pluginName = "GodotAdjust"
 
-val pluginPackageName = "com.krad.godot.adjust"
+val pluginPackageName = "krad.godot.plugin.android.adjust"
 
 android {
     namespace = pluginPackageName
