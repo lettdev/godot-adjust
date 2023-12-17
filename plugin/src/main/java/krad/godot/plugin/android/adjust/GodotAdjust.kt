@@ -53,18 +53,4 @@ class GodotAdjust(godot: Godot): GodotPlugin(godot) {
 
         override fun onActivityStarted(activity: Activity) {}
     }
-
-    @UsedByGodot
-    private fun onButtonPressed() {
-        val classNames = listOf("com.adjust.sdk.Adjust", "com.adjust.sdk.AdjustConfig", "com.adjust.sdk.LogLevel")
-
-        classNames.forEach { className ->
-            try {
-                val clazz = Class.forName(className)
-                Log.i(TAG, "Class found: $clazz")
-            } catch (e: ClassNotFoundException) {
-                Log.i(TAG, "Class not found: $className")
-            }
-        }
-    }
 }

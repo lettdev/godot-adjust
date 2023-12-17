@@ -3,11 +3,13 @@ extends EditorPlugin
 
 # A class member to hold the editor export plugin during its lifecycle.
 var export_plugin : AndroidExportPlugin
+var _plugin_name = "GodotAdjust"
 
 func _enter_tree():
 	# Initialization of the plugin goes here.
 	export_plugin = AndroidExportPlugin.new()
 	add_export_plugin(export_plugin)
+	add_autoload_singleton("Adjust", "res://addons/" + _plugin_name + "/adjust.gd")
 
 
 func _exit_tree():
@@ -16,9 +18,16 @@ func _exit_tree():
 	export_plugin = null
 
 
+func _init():
+	add_custom_project_setting("krad/adjust_sdk/general/app_token", TYPE_STRING, "")
+	add_custom_project_setting("krad/adjust_sdk/general/production_mode", TYPE_BOOL, false)
+	var error: int = ProjectSettings.save()
+	if error: push_error("Encountered error %d when saving project settings." % error)
+
+
 class AndroidExportPlugin extends EditorExportPlugin:
 	var _plugin_name = "GodotAdjust"
-
+	
 	func _supports_platform(platform):
 		if platform is EditorExportPlatformAndroid:
 			return true
@@ -46,3 +55,18 @@ class AndroidExportPlugin extends EditorExportPlugin:
 
 	func _get_name():
 		return _plugin_name
+
+
+func add_custom_project_setting(name: String, type: int, default_value, hint: int = PROPERTY_HINT_NONE, hint_string: String = "") -> void:
+	if ProjectSettings.has_setting(name): return
+
+	var setting_info: Dictionary = {
+		"name": name,
+		"type": type,
+		"hint": hint,
+		"hint_string": hint_string
+	}
+
+	ProjectSettings.set_setting(name, default_value)
+	ProjectSettings.add_property_info(setting_info)
+	ProjectSettings.set_initial_value(name, default_value)
