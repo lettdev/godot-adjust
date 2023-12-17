@@ -36,15 +36,12 @@ android {
 }
 
 dependencies {
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation("org.godotengine:godot:4.2.0.stable")
-    api ("com.adjust.sdk:adjust-android:4.33.5")
-    api ("com.android.installreferrer:installreferrer:2.2")
-    api ("com.google.android.gms:play-services-ads-identifier:18.0.1")
-
-    implementation ("androidx.appcompat:appcompat:1.1.0")
-    testImplementation ("junit:junit:4.12")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.1")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.2.0")
+    implementation("com.adjust.sdk:adjust-android:4.37.0")
+    implementation("com.android.installreferrer:installreferrer:2.2")
+    implementation("com.google.android.gms:play-services-ads-identifier:18.0.1")
+    implementation ("androidx.appcompat:appcompat:1.3.1")
 }
 
 // BUILD TASKS DEFINITION

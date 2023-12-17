@@ -23,12 +23,19 @@ Adjust="*res://adjust.gd"
 
 settings/stdout/verbose_stdout=true
 
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/stretch/mode="viewport"
+window/handheld/orientation=1
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/GodotAdjust/plugin.cfg")
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
+renderer/rendering_method="mobile"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true

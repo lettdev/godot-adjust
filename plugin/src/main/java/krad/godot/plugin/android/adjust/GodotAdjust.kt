@@ -1,7 +1,6 @@
 package krad.godot.plugin.android.adjust
 
 import android.util.Log
-import android.widget.Toast
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
@@ -24,17 +23,14 @@ class GodotAdjust(godot: Godot): GodotPlugin(godot) {
     @UsedByGodot
     private fun init(appToken: String, production: Boolean) {
         runOnUiThread {
-            Toast.makeText(activity, appToken, Toast.LENGTH_LONG).show()
-            Log.v(TAG, appToken)
-            
             val environment = if (production) AdjustConfig.ENVIRONMENT_PRODUCTION else AdjustConfig.ENVIRONMENT_SANDBOX
 
-            // val config = AdjustConfig(activity, appToken, environment)
+            val config = AdjustConfig(activity, appToken, environment)
+            config.setLogLevel(LogLevel.VERBOSE)
+            Adjust.onCreate(config)
+            Adjust.onResume()
 
-            // Adjust.onCreate(config)
-            // Adjust.onResume()
-
-            activity!!.application!!.registerActivityLifecycleCallbacks(AdjustLifecycleCallbacks())
+            activity?.application?.registerActivityLifecycleCallbacks(AdjustLifecycleCallbacks())
         }
     }
 
@@ -60,6 +56,15 @@ class GodotAdjust(godot: Godot): GodotPlugin(godot) {
 
     @UsedByGodot
     private fun onButtonPressed() {
-        Log.i(TAG, "OnButtonPressed from Kotlin")
+        val classNames = listOf("com.adjust.sdk.Adjust", "com.adjust.sdk.AdjustConfig", "com.adjust.sdk.LogLevel")
+
+        classNames.forEach { className ->
+            try {
+                val clazz = Class.forName(className)
+                Log.i(TAG, "Class found: $clazz")
+            } catch (e: ClassNotFoundException) {
+                Log.i(TAG, "Class not found: $className")
+            }
+        }
     }
 }

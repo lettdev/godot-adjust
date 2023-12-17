@@ -29,6 +29,20 @@ class AndroidExportPlugin extends EditorExportPlugin:
 			return PackedStringArray([_plugin_name + "/bin/debug/" + _plugin_name + "-debug.aar"])
 		else:
 			return PackedStringArray([_plugin_name + "/bin/release/" + _plugin_name + "-release.aar"])
+	
+	func _get_android_dependencies(platform, debug):
+		if debug:
+			return PackedStringArray([
+				"com.adjust.sdk:adjust-android:4.37.0",
+				"com.android.installreferrer:installreferrer:2.2",
+				"com.google.android.gms:play-services-ads-identifier:18.0.1"
+			])
+		else:
+			return PackedStringArray([
+				"com.adjust.sdk:adjust-android:4.37.0",
+				"com.android.installreferrer:installreferrer:2.2",
+				"com.google.android.gms:play-services-ads-identifier:18.0.1"
+			])
 
 	func _get_name():
 		return _plugin_name
